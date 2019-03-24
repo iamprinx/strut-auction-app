@@ -9,4 +9,12 @@
     <package name="default" extends="struts-default">
         
     </package>
+    
+    
+    <package name="user" namespace="/user" extends="struts-default">
+        <action name="navToLogin">
+            <result>pages/login_form.jsp</result>
+        </action>
+    </package>
+    
 </struts>
