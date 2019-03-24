@@ -12,8 +12,12 @@
     
     
     <package name="user" namespace="/user" extends="struts-default">
-        <action name="navToLogin">
+        <action name="nav-to-login">
             <result>pages/login_form.jsp</result>
+        </action>
+        
+        <action name="nav-to-register">
+            <result>pages/registration_form.jsp</result>
         </action>
     </package>
     

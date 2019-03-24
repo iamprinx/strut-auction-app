@@ -14,7 +14,11 @@
                     <div class="head-wrap">
                         <h1>Welcome to Bidx</h1>
                         <p>your product can get the highest bid it deserves</p>
-                        <s:a action="navToLogin" namespace="/user">login</s:a> 
+                        <s:a action="nav-to-login" namespace="/user">login</s:a> 
+                        <p>
+                            Don't have an account ?
+                            <s:a action="nav-to-register" namespace="/user">register</s:a> 
+                        </p>
                     </div>
                 </div>
             </div>

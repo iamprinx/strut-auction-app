@@ -1,24 +1,24 @@
+<%-- 
+    Document   : registration_form
+    Created on : Mar 24, 2019, 3:47:27 PM
+    Author     : i-am-prinx
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home | Bidx </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>login | Bidx</title>
     </head>
     <body>
         <div class="wrapper">
             <div class="cover">
                 <div class="container">
                     <div class="head-wrap">
-                        <h1>Welcome to Bidx</h1>
-                        <p>your product can get the highest bid it deserves</p>
-                        <s:a action="nav-to-login" namespace="/user">login</s:a> 
-                        <p>
-                            Don't have an account ?
-                            <s:a action="nav-to-register" namespace="/user">register</s:a> 
-                        </p>
+                        <h1>Register</h1>
+                        <p>All details are required</p>
                     </div>
                 </div>
             </div>
