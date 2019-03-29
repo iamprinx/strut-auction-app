@@ -12,6 +12,6 @@
         <title>Profile | Bidx</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Hello and welcome to your profile page!</h1>
     </body>
 </html>

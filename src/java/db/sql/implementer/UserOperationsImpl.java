@@ -1,7 +1,10 @@
 package db.sql.implementer;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 
 import connection.ConnectionFactory;
 import models.User;
@@ -43,19 +46,44 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
     */
 
     
-    /* helps to retrieve a particular user instance from data source
+    /**
+     * helps to retrieve a particular user instance from data source
      * @retuns User
     */
     @Override
     public User get() {
         
         Connection con = ConnectionFactory.getConnection();
+        String query = "select * from user where username=?";
+        
+        User retrieved_user = new User();;
+        
         try {
-            // retrieve a user from data source with username and return user
+            PreparedStatement prepared_stmnt = con.prepareStatement(query);
+            prepared_stmnt.setString(1, getUsername());
+            ResultSet result = prepared_stmnt.executeQuery();
+            
+            int counter = 1;
+            while (result.next()){
+               retrieved_user.setUsername(result.getString("username"));
+               retrieved_user.setFirstname(result.getString("firstname"));
+               retrieved_user.setLastname(result.getString("lastname"));
+               retrieved_user.setEmail(result.getString("email"));
+               retrieved_user.setPassword(result.getString("passkey"));
+               retrieved_user.setId(result.getInt("id"));
+               
+               return retrieved_user;
+            }
         } catch (Exception e) {
-            
+            System.out.println("Single Retrieval Error: \n\n" + e);
         } finally {
-            
+            if (con != null ){
+                try {
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error encountered while closing connection ( SR ):\n\n" + e);
+                }
+            }
         }
         
         return null;

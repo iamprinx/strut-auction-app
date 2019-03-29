@@ -2,6 +2,8 @@ package actionbean;
 
 import db.sql.implementer.UserOperationsImpl;
 
+import models.User;
+
 
 /**
  * Helps to authenticate and validate a user at login. It also routes a user to
@@ -20,7 +22,14 @@ public class LoginAction extends UserOperationsImpl {
     
     @Override
     public String execute() throws Exception {
-        return SUCCESS;
+        User auth_user = get();                 // retrieve user trying to login 
+        
+        // if the inputted login password is equal to the password retreived from
+        // data source.
+        if (auth_user.getPassword().equals(getPassword())){
+            return SUCCESS;
+        }
+        return ERROR;
     }
     
     @Override

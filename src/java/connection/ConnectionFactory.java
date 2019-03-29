@@ -10,7 +10,7 @@ import java.sql.Connection;
  */
 public class ConnectionFactory {
     
-    private static String URL = "";
+    private static String URL = "jdbc:mysql://localhost:3306/bidnbuy?zeroDateTimeBehavior=convertToNull&serverTimezone=UTC";
     private static String USER = "root";
     
     

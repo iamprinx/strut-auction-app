@@ -9,9 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Error ococurred | Bidx</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h3>
+            Oops, we've encountered an error, please check your passed credentials and try again
+            <br>
+            <small>
+                Are you still connected to the internet ?
+            </small>
+        </h3>
     </body>
 </html>
