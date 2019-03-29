@@ -19,6 +19,12 @@
         <action name="nav-to-register">
             <result>pages/registration_form.jsp</result>
         </action>
+        
+        <action name="login" class="actionbean.LoginAction" >
+            <result name="input">pages/login_form.jsp</result>
+            <result name="error">pages/error.jsp</result>
+            <result name="success">pages/profile.jsp</result>
+        </action>
     </package>
     
 </struts>

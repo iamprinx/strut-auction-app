@@ -1,0 +1,22 @@
+[ ******************** A very important link  **********************]
+https://stackoverflow.com/questions/8615210/struts-action-inheritance
+[ ******************** A very important link  **********************]
+
+Project Structure ( for continuous understanding ):
+
+model ( folder ):
+    Holds a virtual representation of every entity modeled in the data source
+    for temporal usage  ( pure java class )
+
+connection ( folder ):
+    Holds connection to the database ( pure java class )
+
+db ( folder ):
+    Blueprint of the SQL operations needed by all entity ( java interface )
+
+action ( folder ):
+    Web app router and form validations ( pure java class )
+
+db.sql.implementer( folder ):
+    Encapsulate sql operations blueprint declared in the db folder ( abstract 
+    classes )
