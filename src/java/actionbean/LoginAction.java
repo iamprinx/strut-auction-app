@@ -1,5 +1,6 @@
 package actionbean;
 
+import com.opensymphony.xwork2.ActionContext;
 import db.sql.implementer.UserOperationsImpl;
 
 import models.User;
@@ -17,16 +18,17 @@ public class LoginAction extends UserOperationsImpl {
                    (of retrieved user) with the passed password
         *                                                                    *
     */
+    private User user;
     
     public LoginAction() { }
     
     @Override
     public String execute() throws Exception {
-        User auth_user = get();                 // retrieve user trying to login 
+        user = get();                 // retrieve user trying to login 
         
         // if the inputted login password is equal to the password retreived from
         // data source.
-        if (auth_user.getPassword().equals(getPassword())){
+        if (user.getPassword().equals(getPassword())){
             return SUCCESS;
         }
         return ERROR;
@@ -41,4 +43,16 @@ public class LoginAction extends UserOperationsImpl {
            addFieldError("password", "this field required");
        }
     }
+    
+
+    /*
+        *                                                               *
+          Getter methods below helps to access the properties of a user
+          that was retrieved from the database.
+        *                                                               *
+    */  
+    public String getFirstname()    {  return user.getFirstname(); }
+    public String getLastname()     {  return user.getLastname();  }
+    public String getEmail()        {  return user.getEmail();     }
+    public String getFullname() { return user.getFirstname() + " " + user.getLastname(); }
 }

@@ -16,7 +16,7 @@
             Oops, we've encountered an error, please check your passed credentials and try again
             <br>
             <small>
-                Are you still connected to the internet ?
+                Are you still connected to thez internet ?
             </small>
         </h3>
     </body>

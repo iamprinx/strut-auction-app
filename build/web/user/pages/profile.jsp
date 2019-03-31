@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +13,7 @@
         <title>Profile | Bidx</title>
     </head>
     <body>
-        <h1>Hello and welcome to your profile page!</h1>
+        <h1>Hello <s:property value="getFullname()" /> and welcome to your profile page!</h1>
+                
     </body>
 </html>

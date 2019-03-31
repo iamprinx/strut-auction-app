@@ -31,13 +31,14 @@ import db.SqlOperations;
 
 public class UserOperationsImpl extends ActionSupport implements SqlOperations<User> {
     
+    protected User retrieved_user;
     protected String username;
     protected String password;
     protected String firstname;
     protected String lastname;
     protected String email;
     protected int id;
-    
+   
     
     /*                                                                    
         *                                                               *
@@ -56,14 +57,13 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
         Connection con = ConnectionFactory.getConnection();
         String query = "select * from user where username=?";
         
-        User retrieved_user = new User();;
+        retrieved_user = new User();;
         
         try {
             PreparedStatement prepared_stmnt = con.prepareStatement(query);
             prepared_stmnt.setString(1, getUsername());
             ResultSet result = prepared_stmnt.executeQuery();
             
-            int counter = 1;
             while (result.next()){
                retrieved_user.setUsername(result.getString("username"));
                retrieved_user.setFirstname(result.getString("firstname"));
@@ -90,9 +90,20 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
     }
     
     /*                                                                    
-        *                                                               *
+        *                                                                   *
                             SETTERS AND GETTERS BELOW
-        *                                                               *
+          it should be noted that these setter and getter method can only 
+          be used to retrieve the values filled in form. calling any of these
+          method below wouldn't give us the value of the user that was 
+          retrieved.
+    
+          example:
+            getUsername()            !=         retrieved_user.getUsername()
+            form value is returned             a user's value is returned
+    
+          so this is to clarify that non of these methods below can be used
+          to access the properties of a user retrieved from the data source.
+        *                                                                   *
     */
 
     public String getUsername() {
@@ -144,5 +155,5 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
     }
     
     
-    
+     
 }
