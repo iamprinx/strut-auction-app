@@ -31,7 +31,6 @@ import db.SqlOperations;
 
 public class UserOperationsImpl extends ActionSupport implements SqlOperations<User> {
     
-    protected User retrieved_user;
     protected String username;
     protected String password;
     protected String firstname;
@@ -57,12 +56,12 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
         Connection con = ConnectionFactory.getConnection();
         String query = "select * from user where username=?";
         
-        retrieved_user = new User();;
+        User retrieved_user = new User();;
         
         try {
-            PreparedStatement prepared_stmnt = con.prepareStatement(query);
-            prepared_stmnt.setString(1, getUsername());
-            ResultSet result = prepared_stmnt.executeQuery();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, getUsername());
+            ResultSet result = ps.executeQuery();
             
             while (result.next()){
                retrieved_user.setUsername(result.getString("username"));
@@ -88,6 +87,54 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
         
         return null;
     }
+    
+    /**
+     * helps to insert data into the data source
+     * @return user
+     */
+    @Override
+    public User insertInto(){
+        User user = new User();
+        int rows_affected = 0;
+        
+        Connection con = ConnectionFactory.getConnection();
+        String query = "insert into user ( username, firstname, lastname, email, passkey )";
+        query += "values(?, ?, ?, ?, ?)";
+        
+        // inserting details to data source
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, getUsername());
+            ps.setString(2, getFirstname());
+            ps.setString(3, getLastname());
+            ps.setString(4, getEmail());
+            ps.setString(5, getPassword());
+            rows_affected = ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Unable to insert data to table : \n" + e);
+        } finally {
+            if ( con != null ){
+                try {
+                    con.close();
+                } catch( Exception e){ System.out.print("Unable to close connection"); }
+            }
+        }
+        
+        // if user's details are inserted to data source, then set same details
+        // to the user model object.
+        if (rows_affected != 0){
+            user.setUsername(getUsername());
+            user.setFirstname(getFirstname());
+            user.setLastname(getLastname());
+            user.setEmail(getEmail());
+            user.setPassword(getPassword());
+            
+            return user;
+        }
+        
+        return null;
+    }
+    
     
     /*                                                                    
         *                                                                   *

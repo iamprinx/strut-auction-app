@@ -16,7 +16,7 @@ public interface SqlOperations<T> {
 //    public Set<T> getAll();
     
     // helps to handle insertion of data
-//    public int insertInto();
+    public T insertInto();
     
     // helps to handle deletion of data
 //    public int deleteFrom();

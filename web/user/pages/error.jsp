@@ -9,15 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Error ococurred | Bidx</title>
+        <title>Error occurred | Bidx</title>
+        <link rel="stylesheet" 
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+              crossorigin="anonymous">
     </head>
     <body>
-        <h3>
+        <small class="text-danger">
             Oops, we've encountered an error, please check your passed credentials and try again
             <br>
-            <small>
-                Are you still connected to thez internet ?
-            </small>
-        </h3>
+            Are you still connected to the Internet ?
+        </small>
     </body>
 </html>

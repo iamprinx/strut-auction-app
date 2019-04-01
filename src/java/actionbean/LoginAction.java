@@ -1,9 +1,14 @@
 package actionbean;
 
-import com.opensymphony.xwork2.ActionContext;
-import db.sql.implementer.UserOperationsImpl;
+import org.apache.struts2.interceptor.SessionAware;
 
+import com.opensymphony.xwork2.ActionContext;
+
+import java.util.Map;
+
+import db.sql.implementer.UserOperationsImpl;
 import models.User;
+
 
 
 /**
@@ -11,37 +16,57 @@ import models.User;
  * a defined page based on the end result of authentication.
  * @author i-am-prinx
  */
-public class LoginAction extends UserOperationsImpl {
+public class LoginAction extends UserOperationsImpl implements SessionAware {
+    private User user;
+    private Map<String, Object> sessionMap;
+    
+    public LoginAction() { }
+    
     /*                                                                    
         *                                                                    *
                 Retrieve a user instance and validate the passkey 
                    (of retrieved user) with the passed password
         *                                                                    *
     */
-    private User user;
-    
-    public LoginAction() { }
-    
     @Override
     public String execute() throws Exception {
         user = get();                 // retrieve user trying to login 
         
-        // if the inputted login password is equal to the password retreived from
-        // data source.
-        if (user.getPassword().equals(getPassword())){
+        String loggedUserName = null;
+        
+        // check session if the requesting user has already been logged in.
+        if ( sessionMap.containsKey("userName")){
+            loggedUserName = (String) sessionMap.get("userName");
+        }
+        
+        // if the user is present in the session, just log in the user
+        if ( loggedUserName != null && loggedUserName.equals(user.getUsername())){
             return SUCCESS;
         }
+        
+        // if the inputted login password is equal to the password retreived from
+        // data source. This will only happen if no user is found in session
+        if ( user != null && user.getPassword().equals(getPassword())){
+            sessionMap.put("userName", user.getUsername());     // include this new user in session
+            return SUCCESS;
+        }
+        
         return ERROR;
     }
     
     @Override
     public void validate() {
-       if ( getUsername().length() == 0){
+       if ( user == null && getUsername().length() == 0){
            addFieldError("username", "this field is required");
        }
-       if ( getPassword().length() == 0){
+       if ( user == null && getPassword().length() == 0){
            addFieldError("password", "this field required");
        }
+    }
+    
+    @Override
+    public void setSession(Map<String, Object> map) {
+        this.sessionMap = map;
     }
     
 

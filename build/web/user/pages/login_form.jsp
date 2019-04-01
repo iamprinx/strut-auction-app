@@ -37,7 +37,7 @@
                 </s:form>
                 <div class="col-2 p-2">
                     <small>
-                        need an account ? <s:a action="/registration" >register</s:a>
+                        need an account ? <s:a action="nav-to-register" namespace="/user">register</s:a> 
                     </small> <br>
                     <small class="text-danger">
                         forgotten password ?
