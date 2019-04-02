@@ -2,8 +2,6 @@ package actionbean;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.opensymphony.xwork2.ActionContext;
-
 import java.util.Map;
 
 import db.sql.implementer.UserOperationsImpl;
@@ -32,22 +30,22 @@ public class LoginAction extends UserOperationsImpl implements SessionAware {
     public String execute() throws Exception {
         user = get();                 // retrieve user trying to login 
         
-        String loggedUserName = null;
+        User sessionUser = null;
         
         // check session if the requesting user has already been logged in.
-        if ( sessionMap.containsKey("userName")){
-            loggedUserName = (String) sessionMap.get("userName");
+        if ( sessionMap.containsKey("User")){
+            sessionUser = (User) sessionMap.get("User");
         }
         
         // if the user is present in the session, just log in the user
-        if ( loggedUserName != null && loggedUserName.equals(user.getUsername())){
+        if ( sessionUser != null && sessionUser.getUsername().equals(user.getUsername())){
             return SUCCESS;
         }
         
         // if the inputted login password is equal to the password retreived from
         // data source. This will only happen if no user is found in session
         if ( user != null && user.getPassword().equals(getPassword())){
-            sessionMap.put("userName", user.getUsername());     // include this new user in session
+            sessionMap.put("User", user);     // include this new user in session
             return SUCCESS;
         }
         

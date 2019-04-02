@@ -25,6 +25,10 @@ public class User {
         *                                                               *
     */
     
+    public String getFullname() {
+        return getFirstname() + " " + getLastname();
+    }
+    
     public String getUsername() {
         return username;
     }

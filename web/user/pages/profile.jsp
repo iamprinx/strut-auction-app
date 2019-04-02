@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
@@ -19,10 +20,27 @@
     <body>
         <div class="container-fluid">
             <div>
-                <h4>Hello <s:property value="getFullname()" />, your profile details below</h4>
-                <p><b>Firstname</b>: <s:property value="getFirstname()" /></p>
-                <p><b>Lastname</b>: <s:property value="getLastname()" /></p>
-                <p><b>Email</b> : <s:property value="getEmail()" /></p>
+                
+                <s:a cssClass="btn btn-sm btn-danger"> logout </s:a>
+                
+                <h4>
+                    Hello 
+                    <c:out value="${user.getFullname()}" />, 
+                    your profile details below
+                </h4>
+                <p>
+                    <b>Firstname</b>: 
+                    <c:out value="${user.getFirstname()}" />
+                </p>
+                <p>
+                    <b>Lastname</b>: 
+                    <c:out value="${user.getLastname()}" />
+                </p>
+                <p>
+                    <b>Email</b> : 
+                    <c:out value="${user.getEmail()}" />
+                </p>
+                
                 <s:a cssClass="btn btn-sm btn-info text-white">edit details</s:a>
             </div>
         </div>                       

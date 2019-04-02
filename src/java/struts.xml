@@ -23,7 +23,7 @@
         <action name="login" class="actionbean.LoginAction" >
             <result name="input">pages/login_form.jsp</result>
             <result name="error">pages/error.jsp</result>
-            <result name="success">pages/profile.jsp</result>
+            <result name="success" type="redirect">pages/profile.jsp</result>
         </action>
         
         <action name="register" class="actionbean.RegistrationAction" >

@@ -27,12 +27,12 @@ public class RegistrationAction extends UserOperationsImpl implements SessionAwa
         // at the creation of a new user, the user in the previous 
         // session should be removed and the newly registered user should be
         // set in session.
-        if (user != null && sessionMap.containsKey("userName")){
-           sessionMap.remove("userName");
+        if (user != null && sessionMap.containsKey("user")){
+           sessionMap.remove("user");
         }
         
         if (user != null){
-            sessionMap.put("userName", user.getUsername());
+            sessionMap.put("user", user);
             return SUCCESS;
         }
         return ERROR;
@@ -75,7 +75,6 @@ public class RegistrationAction extends UserOperationsImpl implements SessionAwa
 
     public void setConfirm_password(String confirm_password) {
         this.confirm_password = confirm_password;
-    }  
-    
-    public String getFullname(){ return getFirstname() + " " + getLastname();   }
+    }
+
 }
