@@ -31,6 +31,10 @@
             <result name="error">pages/error.jsp</result>
             <result name="success" type="redirect"> pages/profile.jsp</result>
         </action>
+        
+        <action name="logout" class="actionbean.LogoutAction">
+            <result name="success">/pages/index.jsp</result>
+        </action>
     </package>
     
 </struts>

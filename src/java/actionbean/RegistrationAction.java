@@ -27,12 +27,12 @@ public class RegistrationAction extends UserOperationsImpl implements SessionAwa
         // at the creation of a new user, the user in the previous 
         // session should be removed and the newly registered user should be
         // set in session.
-        if (user != null && sessionMap.containsKey("user")){
-           sessionMap.remove("user");
+        if (user != null && sessionMap.containsKey("User")){
+           sessionMap.remove("User");
         }
         
         if (user != null){
-            sessionMap.put("user", user);
+            sessionMap.put("User", user);
             return SUCCESS;
         }
         return ERROR;

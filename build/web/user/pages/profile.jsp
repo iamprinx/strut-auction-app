@@ -21,7 +21,8 @@
         <div class="container-fluid">
             <div>
                 
-                <s:a cssClass="btn btn-sm btn-danger"> logout </s:a>
+                <s:a cssClass="btn btn-sm btn-danger" 
+                     action="logout" namespace="/user" > logout </s:a>
                 
                 <h4>
                     Hello 
