@@ -12,13 +12,13 @@ import models.User;
  *
  * @author i-am-prinx
  */
-public class RegistrationAction extends UserOperationsImpl implements SessionAware{
+public class UserRegistration extends UserOperationsImpl implements SessionAware{
     private Map<String, Object> sessionMap;
     
     private String confirm_password;
     private User user;
     
-    public RegistrationAction() { }
+    public UserRegistration() { }
     
     public String execute() throws Exception {
         user = insertInto();
@@ -27,12 +27,12 @@ public class RegistrationAction extends UserOperationsImpl implements SessionAwa
         // at the creation of a new user, the user in the previous 
         // session should be removed and the newly registered user should be
         // set in session.
-        if (user != null && sessionMap.containsKey("User")){
-           sessionMap.remove("User");
+        if (user != null && sessionMap.containsKey("user")){
+           sessionMap.remove("user");
         }
         
         if (user != null){
-            sessionMap.put("User", user);
+            sessionMap.put("user", user);
             return SUCCESS;
         }
         return ERROR;

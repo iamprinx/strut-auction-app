@@ -136,6 +136,44 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
     }
     
     
+     @Override
+    public User updateData(User obj) {
+        User user = new User();
+        // this populate the user object with obj data
+        user = obj; 
+        
+        Connection con = ConnectionFactory.getConnection();
+        int id = obj.getId();   // get the id of the passed object data
+        String query = "update user set firstname=?, lastname=?, email=? where id=?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, getFirstname());
+            ps.setString(2, getLastname());
+            ps.setString(3, getEmail());
+            ps.setInt(4, id);
+            
+            // update the user object with the appropriate data filled in form.
+            user.setFirstname(getFirstname());
+            user.setLastname(getLastname());
+            user.setEmail(getEmail());
+            
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Update error:\n" + e);
+        } finally {
+            if ( con != null ){
+                try {
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error closing connection");
+                }
+            }
+        }
+        return user; 
+    }
+    
+        
     /*                                                                    
         *                                                                   *
                             SETTERS AND GETTERS BELOW
@@ -201,6 +239,4 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
         this.id = id;
     }
     
-    
-     
 }

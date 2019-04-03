@@ -26,14 +26,20 @@
             <result name="success" type="redirect">pages/profile.jsp</result>
         </action>
         
-        <action name="register" class="actionbean.RegistrationAction" >
-            <result name="input">pages/registration_form.jsp</result>
+        <action name="update" class="actionbean.UserProfileUpdate" >
+            <result name="input">pages/profile.jsp</result>
             <result name="error">pages/error.jsp</result>
-            <result name="success" type="redirect"> pages/profile.jsp</result>
+            <result name="success" type="redirect">pages/profile.jsp</result>
         </action>
         
         <action name="logout" class="actionbean.LogoutAction">
             <result name="success">/pages/index.jsp</result>
+        </action>
+        
+        <action name="register" class="actionbean.UserRegistration" >
+            <result name="input">pages/registration_form.jsp</result>
+            <result name="error">pages/error.jsp</result>
+            <result name="success" type="redirect">pages/profile.jsp</result>
         </action>
     </package>
     

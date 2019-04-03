@@ -46,7 +46,7 @@
                 
                 <div class="hide">
                     <div class="col-2 mt-1">
-                    <s:form action="update-user-profile" method="post">
+                    <s:form action="update" method="post" namespace="/user" >
                         <s:textfield 
                             value="%{#session.user.firstname}" 
                             name="firstname"

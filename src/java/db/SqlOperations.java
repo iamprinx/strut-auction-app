@@ -22,6 +22,6 @@ public interface SqlOperations<T> {
 //    public int deleteFrom();
     
     // helps to handle data update
-//    public int update();
+    public T updateData(T obj);
     
 }
