@@ -20,7 +20,7 @@
     <body>
         <div class="container-fluid">
             <div>
-                
+                <c:set var="user" value="${user}" />
                 <s:a cssClass="btn btn-sm btn-danger" 
                      action="logout" namespace="/user" > logout </s:a>
                 
@@ -43,6 +43,33 @@
                 </p>
                 
                 <s:a cssClass="btn btn-sm btn-info text-white">edit details</s:a>
+                
+                <div class="hide">
+                    <div class="col-2 mt-1">
+                    <s:form action="update-user-profile" method="post">
+                        <s:textfield 
+                            value="%{#session.user.firstname}" 
+                            name="firstname"
+                            placeholder="firstname" 
+                            cssClass="form-control mb-1" 
+                            required="true" />
+                        <s:textfield 
+                            value="%{#session.user.lastname}"
+                            name="lastname" 
+                            placeholder="lastname"  
+                            cssClass="form-control mb-1" 
+                            required="true" />
+                        <s:textfield 
+                            value="%{#session.user.email}"
+                            name="email" 
+                            type="email"
+                            placeholder="email" 
+                            cssClass="form-control mb-1" 
+                            required="true" />
+                        <s:submit cssClass="btn btn-sm btn-success" value="update" />
+                     </s:form>
+                    </div>
+                </div>
             </div>
         </div>                       
     </body>
