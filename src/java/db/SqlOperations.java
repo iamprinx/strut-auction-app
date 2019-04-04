@@ -10,7 +10,7 @@ import java.util.Set;
 public interface SqlOperations<T> {
     
     // retrieves an instance of the specified return type
-    public T get();
+    public T get(Integer... Id);
     
     // retrieves all instances of the specified return type
     public Set<T> getAll();

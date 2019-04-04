@@ -17,8 +17,8 @@ public class LogoutAction extends ActionSupport implements SessionAware {
     
     // check if a user exists in session, remove the user if there is.
     public String execute() throws Exception {
-        if ( session.containsKey("user")){
-            session.remove("user");
+        if ( session.containsKey("auth_user")){
+            session.remove("auth_user");
         }
         return SUCCESS;
     }

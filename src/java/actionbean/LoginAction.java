@@ -33,8 +33,8 @@ public class LoginAction extends UserOperationsImpl implements SessionAware {
         User sessionUser = null;
         
         // check session if the requesting user has already been logged in.
-        if ( sessionMap.containsKey("user")){
-            sessionUser = (User) sessionMap.get("user");
+        if ( sessionMap.containsKey("auth_user")){
+            sessionUser = (User) sessionMap.get("auth_user");
         }
         
         // if the user is present in the session, just log in the user
@@ -45,7 +45,7 @@ public class LoginAction extends UserOperationsImpl implements SessionAware {
         // if the inputted login password is equal to the password retreived from
         // data source. This will only happen if no user is found in session
         if ( user != null && user.getPassword().equals(getPassword())){
-            sessionMap.put("user", user);     // include this new user in session
+            sessionMap.put("auth_user", user);     // include this new user in session
             return SUCCESS;
         }
         

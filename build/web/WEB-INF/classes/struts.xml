@@ -4,6 +4,9 @@
 
 <struts>
     <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.SlashesInActionNames" value="true"/> 
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <constant name="struts.patternMatcher" value="regex"/>
     
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
@@ -12,34 +15,55 @@
     
     
     <package name="user" namespace="/user" extends="struts-default">
+        
+        <!-- this url helps to navigate to the login page -->
         <action name="nav-to-login">
             <result>pages/login_form.jsp</result>
         </action>
 
+        <!-- this url helps to navigate to the registration page -->
         <action name="nav-to-register">
             <result>pages/registration_form.jsp</result>
         </action>
         
+        <!-- this url helps to navigate to where all the registered users are displayed -->
         <action name="nav-to-user-list" class="actionbean.UserList">
             <result>pages/user_list.jsp</result>
         </action>
         
+        <!-- this url helps to navigate to a particular user page -->
+        <action name="{userid}" class="actionbean.RequestedUniqueUser">
+            <param name="userid">${userid}</param>
+            <result name="error">pages/error.jsp</result>
+            <result name="success" >pages/unique_user_profile.jsp</result>
+        </action>
+        
+        <!-- 
+            this url helps in the validation and authenticateion of a 
+            login,it also adds a user to session 
+        -->
         <action name="login" class="actionbean.LoginAction" >
             <result name="input">pages/login_form.jsp</result>
             <result name="error">pages/error.jsp</result>
             <result name="success" type="redirect">pages/profile.jsp</result>
         </action>
-        
+                
+        <!-- this url helps to update a particular user profile -->
         <action name="update" class="actionbean.UserProfileUpdate" >
             <result name="input">pages/profile.jsp</result>
             <result name="error">pages/error.jsp</result>
             <result name="success" type="redirect">pages/profile.jsp</result>
         </action>
         
+        <!-- this url helps to logout a user and remove same user from session -->
         <action name="logout" class="actionbean.LogoutAction">
             <result name="success">/pages/index.jsp</result>
         </action>
         
+        <!-- 
+            this url helps in the creations, validation and authenticateion of a 
+            registration, it also adds a user to session 
+        -->
         <action name="register" class="actionbean.UserRegistration" >
             <result name="input">pages/registration_form.jsp</result>
             <result name="error">pages/error.jsp</result>

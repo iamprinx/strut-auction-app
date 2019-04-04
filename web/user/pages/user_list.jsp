@@ -23,10 +23,14 @@
             <div>
                 Fullname: <c:out value="${user.getFullname()}" /> <br />
                 Email: <c:out value="${user.email}" /> <br />
-                <s:url action="getuser" var="userName">
-                    <s:param name="username"><c:out value="${user.username}" /></s:param>
+                
+                <s:url action="/" var="userid" namespace="/user">
+                    <s:param name="userid">
+                        <c:out value="${user.id}" />
+                    </s:param>
                 </s:url>
-                <s:a href="%{userName}">view more</s:a>
+                
+                <s:a href="%{userid}">view more</s:a>
             </div>
             <br />
         </c:forEach>

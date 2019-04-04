@@ -20,7 +20,7 @@
     <body>
         <div class="container-fluid">
             <div>
-                <c:set var="user" value="${user}" />
+                <c:set var="user" value="${auth_user}" />
                 <s:a cssClass="btn btn-sm btn-danger" 
                      action="logout" namespace="/user" > logout </s:a>
                 
@@ -52,19 +52,19 @@
                     <div class="col-2 mt-1">
                     <s:form action="update" method="post" namespace="/user" >
                         <s:textfield 
-                            value="%{#session.user.firstname}" 
+                            value="%{#session.auth_user.firstname}" 
                             name="firstname"
                             placeholder="firstname" 
                             cssClass="form-control mb-1" 
                             required="true" />
                         <s:textfield 
-                            value="%{#session.user.lastname}"
+                            value="%{#session.auth_user.lastname}"
                             name="lastname" 
                             placeholder="lastname"  
                             cssClass="form-control mb-1" 
                             required="true" />
                         <s:textfield 
-                            value="%{#session.user.email}"
+                            value="%{#session.auth_user.email}"
                             name="email" 
                             type="email"
                             placeholder="email" 

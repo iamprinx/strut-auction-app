@@ -30,8 +30,8 @@
                 <s:form action="login" method="post">
                     <div class="col-2">
                         <h4>Login</h4>
-                        <s:textfield name="username" placeholder="username" cssClass="form-control mb-1" />
-                        <s:password name="password" placeholder="password" cssClass="form-control mb-1" />
+                        <s:textfield name="username" placeholder="username" value="%{#session.auth_user.username}" cssClass="form-control mb-1" />
+                        <s:password name="password" placeholder="password" value="%{#session.auth_user.password}" cssClass="form-control mb-1" />
                         <s:submit value="login" cssClass="btn btn-info btn-sm mb-2" />
                     </div>
                 </s:form>
