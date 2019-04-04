@@ -15,9 +15,13 @@
         <action name="nav-to-login">
             <result>pages/login_form.jsp</result>
         </action>
-        
+
         <action name="nav-to-register">
             <result>pages/registration_form.jsp</result>
+        </action>
+        
+        <action name="nav-to-user-list" class="actionbean.UserList">
+            <result>pages/user_list.jsp</result>
         </action>
         
         <action name="login" class="actionbean.LoginAction" >

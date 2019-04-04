@@ -13,7 +13,7 @@ public interface SqlOperations<T> {
     public T get();
     
     // retrieves all instances of the specified return type
-//    public Set<T> getAll();
+    public Set<T> getAll();
     
     // helps to handle insertion of data
     public T insertInto();

@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import connection.ConnectionFactory;
 import models.User;
 import db.SqlOperations;
+import java.sql.Statement;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * This class helps to implement the crud structure defined within the SqlOperations
@@ -171,6 +174,43 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
             }
         }
         return user; 
+    }
+    
+    
+    @Override
+    public Set<User> getAll() {
+        Connection con = ConnectionFactory.getConnection();
+        String query = "select * from user";
+        Set<User> userSet = new HashSet();
+        
+        try {
+            Statement statement = con.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            
+            while(result.next()){
+                User user = new User();
+                
+                user.setId(result.getInt("id"));
+                user.setUsername(result.getString("username"));
+                user.setFirstname(result.getString("firstname"));
+                user.setLastname(result.getString("lastname"));
+                user.setEmail(result.getString("email"));
+                
+                userSet.add(user);
+            }        
+        } catch (Exception e) {
+            System.out.println("Error while retrieving all user data\n"+ e);
+        }finally {
+            if( con != null){
+                try {
+                    con.close();
+                } catch(Exception e){
+                    System.out.println("Error while closing connection \n"+ e);
+                }
+            }
+        }
+        
+        return userSet;
     }
     
         
