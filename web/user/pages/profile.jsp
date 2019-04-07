@@ -48,6 +48,10 @@
                     <s:a action="nav-to-user-list" namespace="/user" >all users</s:a>
                 </div>
                 
+                <div>
+                    <s:a action="nav-to-add-product" namespace="/product" >add product</s:a>
+                </div>
+                
                 <div class="hide">
                     <div class="col-2 mt-1">
                     <s:form action="update" method="post" namespace="/user" >

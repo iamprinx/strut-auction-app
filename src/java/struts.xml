@@ -13,6 +13,16 @@
         
     </package>
     
+    <package name="product" namespace="/product" extends="struts-default">
+        <action name="nav-to-add-product">
+            <result>pages/upload_product.jsp</result>
+        </action>
+        
+        <action name="addProduct" class="actionbean.AddProductAction">
+            <result>/user/pages/profile.jsp</result>
+        </action>
+    </package>
+    
     
     <package name="user" namespace="/user" extends="struts-default">
         
