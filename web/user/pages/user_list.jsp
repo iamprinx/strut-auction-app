@@ -22,7 +22,7 @@
         <c:forEach items="${userlist}" var="user">
             <div>
                 Fullname: <c:out value="${user.getFullname()}" /> <br />
-                Email: <c:out value="${user.email}" /> <br />
+                Email: <c:out value="${user.getEmail()}" /> <br />
                 
                 <s:url action="/" var="userid" namespace="/user">
                     <s:param name="userid">

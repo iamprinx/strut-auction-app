@@ -22,12 +22,12 @@ public class UserProfileUpdate extends UserOperationsImpl implements SessionAwar
     
     @Override
     public String execute() throws Exception{
-        user = (User) session.get("user");
-        session.remove("user");
+        user = (User) session.get("auth_user");
+        session.remove("auth_user");
         if ( user != null ){
             User updated_user = updateData(user);
             if (updated_user != null){                
-                session.put("user", updated_user);
+                session.put("auth_user", updated_user);
                 return SUCCESS;
             }
         }

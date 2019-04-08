@@ -62,7 +62,7 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
     public User get(Integer... Id) {
         
         Connection con = ConnectionFactory.getConnection();
-        String query = (String) "select * from user where username=?";
+        String query = (String) "select * from users where username=?";
         
         User retrieved_user = new User();
         
@@ -71,7 +71,7 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
             
             if (Id.length >= 1){
                 // if a unique key is passed to retrieve a particular object
-                String query_for_arg = "select * from user where id=?";
+                String query_for_arg = "select * from users where id=?";
                 ps = con.prepareStatement(query_for_arg);
                 for(Integer item : Id){
                     ps.setInt(1, item);
@@ -121,7 +121,7 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
         int rows_affected = 0;
         
         Connection con = ConnectionFactory.getConnection();
-        String query = "insert into user ( username, firstname, lastname, email, passkey )";
+        String query = "insert into users ( username, firstname, lastname, email, passkey )";
         query += "values(?, ?, ?, ?, ?)";
         
         // inserting details to data source
@@ -167,7 +167,7 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
         
         Connection con = ConnectionFactory.getConnection();
         int id = obj.getId();   // get the id of the passed object data
-        String query = "update user set firstname=?, lastname=?, email=? where id=?";
+        String query = "update users set firstname=?, lastname=?, email=? where id=?";
         
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -200,7 +200,7 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
     @Override
     public Set<User> getAll() {
         Connection con = ConnectionFactory.getConnection();
-        String query = "select * from user";
+        String query = "select * from users";
         Set<User> userSet = new HashSet();
         
         try {

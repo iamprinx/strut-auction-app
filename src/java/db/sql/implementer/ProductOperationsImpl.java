@@ -10,8 +10,13 @@ import db.SqlOperations;
 import java.io.File;
 import java.util.Set;
 
-import models.Product;
 import connection.ConnectionFactory;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.HashSet;
+
+import models.Product;
+import models.User;
 
 /**
  * This helps to implement CRUD operations for product objects...
@@ -26,30 +31,48 @@ public class ProductOperationsImpl extends ActionSupport implements SqlOperation
     
     
     @Override
-    public void validate( ){
-        if ( name.length() == 0){
-            addFieldError("name", "this field is required");
-        }
-        if ( (Integer)price <= 0 ){
-            addFieldError("price", "negative value not allowed");
-        }
-    }
-    
-    
-    @Override
     public Product get(Integer... Id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Set<Product> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection con = ConnectionFactory.getConnection();
+        String query = "select * from product";
+        Set<Product> productSet = new HashSet();
+        
+        try {
+            Statement statement = con.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            
+            while(result.next()){
+                Product product = new Product();
+                
+                product.setId(result.getInt("id"));
+                product.setName(result.getString("name"));
+                product.setPrice(result.getInt("price"));
+                product.setImage(result.getString("image"));
+                product.setUploadTime(result.getString("uploaded_at"));
+                product.setOwner(result.getInt("owner"));
+                
+                productSet.add(product);
+            }        
+        } catch (Exception e) {
+            System.out.println("Error while retrieving all user data\n"+ e);
+        }finally {
+            if( con != null){
+                try {
+                    con.close();
+                } catch(Exception e){
+                    System.out.println("Error while closing connection \n"+ e);
+                }
+            }
+        }
+        return productSet;
     }
 
     @Override
-    public Product insertInto() { 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Product insertInto() { throw new UnsupportedOperationException("Not supported yet."); }
     
     
     /**

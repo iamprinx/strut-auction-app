@@ -18,6 +18,10 @@
             <result>pages/upload_product.jsp</result>
         </action>
         
+        <action name="nav-to-market" class="actionbean.ProductMarketAction">
+            <result>pages/product_market.jsp</result>
+        </action>
+        
         <action name="addProduct" class="actionbean.AddProductAction">
             <result name="input">pages/upload_product.jsp</result>
             <result name="error">/user/pages/error.jsp</result>
@@ -25,7 +29,7 @@
         </action>
     </package>
     
-    
+    <!-- user package -->
     <package name="user" namespace="/user" extends="struts-default">
         
         <!-- this url helps to navigate to the login page -->
