@@ -67,9 +67,9 @@ public class ProductOperationsImpl extends ActionSupport implements SqlOperation
     public Product insertInto(int userId, String imgPath, String uploadTime){
         Connection con = ConnectionFactory.getConnection();
         String query  = "insert into product(name, price, image, uploaded_at, owner) values(?, ?, ?, ?, ?)";
-        
+        int rows_affected = 0;
                 
-        Product product = null;
+        Product product = new Product();
         
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -79,19 +79,10 @@ public class ProductOperationsImpl extends ActionSupport implements SqlOperation
             ps.setString(4, uploadTime);
             ps.setInt(5, userId);
             
-            int rows_affected = ps.executeUpdate();
-            
-            if (rows_affected >= 1){
-                product.setName(getName());
-                product.setPrice(getPrice());
-                product.setImage(imgPath);
-                product.setUploadTime(uploadTime);
-                product.setOwner(userId);
-            }
-            
-            return product;
+            rows_affected = ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error insert product to db: \n" + e);
+            return null;
         } finally {
             if (con != null){
                 try {
@@ -101,8 +92,19 @@ public class ProductOperationsImpl extends ActionSupport implements SqlOperation
                 }
             }
         }
-      
-        return product;
+        
+        
+        if (rows_affected != 0){
+            product.setPrice(getPrice());
+            product.setImage(imgPath);
+            product.setUploadTime(uploadTime);
+            product.setOwner(userId);
+            product.setName(getName());
+            
+            return product;
+        }
+        
+        return null;
     }
 
     @Override
