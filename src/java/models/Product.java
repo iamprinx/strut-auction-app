@@ -5,12 +5,13 @@ package models;
  * @author i-am-prinx
  */
 public class Product {
-    
+    private String uploadTime;
+    private String image;
     private String name;
     private int price;
     private int owner;
     private int id;
-
+    
     public String getName() {
         return name;
     }
@@ -41,6 +42,22 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+     
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getUploadTime() {
+        return uploadTime;
+    }
+
+    public void setUploadTime(String uploadTime) {
+        this.uploadTime = uploadTime;
     }
      
 }

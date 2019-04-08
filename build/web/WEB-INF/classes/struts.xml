@@ -19,7 +19,8 @@
         </action>
         
         <action name="addProduct" class="actionbean.AddProductAction">
-            <result>/user/pages/profile.jsp</result>
+            <result name="error">/user/pages/error.jsp</result>
+            <result name="success">/user/pages/profile.jsp</result>
         </action>
     </package>
     
