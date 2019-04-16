@@ -16,9 +16,7 @@
         <title>All Users | Bidx</title>
     </head>
     <body>
-        <% HashSet userlist = (HashSet)session.getAttribute("userlist"); %>
         <h1>All users</h1>
-        
         <c:forEach items="${userlist}" var="user">
             <div>
                 Fullname: <c:out value="${user.getFullname()}" /> <br />

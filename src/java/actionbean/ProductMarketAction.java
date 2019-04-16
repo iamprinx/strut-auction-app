@@ -1,37 +1,41 @@
 package actionbean;
 
 import db.sql.implementer.ProductOperationsImpl;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import javax.servlet.http.HttpServletRequest;
+
 import models.Product;
 
-import java.util.Map;
 import java.util.Set;
 
-import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
  * @author i-am-prinx
  */
-public class ProductMarketAction extends ProductOperationsImpl implements SessionAware {
+public class ProductMarketAction extends ProductOperationsImpl implements ServletRequestAware {
     
-    private Map<String, Object> session;
     private Set<Product> productSet;
+    private HttpServletRequest request;
     
     @Override
-    public String execute() throws Exception {
-        if (session.containsKey("productlist")){
-            session.remove("productlist");
-        }
-        
+    public String execute() throws Exception {        
         productSet = getAll();      // retrieve all product
-        System.out.println("the number of objects in productSet are: " + productSet.toArray().length );
-        session.put("productlist", productSet);
+        getServletRequest().setAttribute("products", productSet);
         return SUCCESS;
     }
 
     @Override
-    public void setSession(Map<String, Object> map) {
-        this.session = map;
+    public void setServletRequest(HttpServletRequest hsr) {
+        this.request = hsr;
+    }
+
+    public HttpServletRequest getServletRequest( ) {
+        return request;
+    }
+
+    public Set<Product> getProductSet() {
+        return productSet;
     }
     
 }
