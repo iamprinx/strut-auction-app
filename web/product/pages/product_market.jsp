@@ -16,20 +16,35 @@
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
               crossorigin="anonymous">
+        
+        <style>
+            .product-list {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            
+            .product-list div {
+                margin: 10px;
+            }
+        </style>
     </head>
     <body>      
         <div class="container-fluid">
             <h1>All products</h1>
-            <c:forEach items="${products}" var="product">
-                <p>
-                    <b>Name:</b> 
-                    <c:out value="${product.getName()}" />
-                </p>
-                <p>
-                    Price: <c:out value="${product.getPrice()}" />
-                </p>
-                <img src="${pageContext.request.contextPath}/product-image/${product.getImage()}">
-            </c:forEach>
+            
+            <div class="product-list">
+                <c:forEach items="${products}" var="product">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" 
+                         src="${pageContext.request.contextPath}/product-image/${product.getImage()}">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <c:out value="${product.getName()}" />
+                        </h5>
+                    </div>
+                 </div>
+                </c:forEach>
+            </div>
         </div>
     </body>
 </html>

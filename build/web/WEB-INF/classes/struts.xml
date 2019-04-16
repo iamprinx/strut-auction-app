@@ -48,8 +48,8 @@
         </action>
         
         <!-- this url helps to navigate to a particular user page -->
-        <action name="{userid}" class="actionbean.RequestedUniqueUser">
-            <param name="userid">${userid}</param>
+        <action name="{username}" class="actionbean.RequestedUniqueUser">
+            <param name="username">${username}</param>
             <result name="error">pages/error.jsp</result>
             <result name="success" >pages/unique_user_profile.jsp</result>
         </action>

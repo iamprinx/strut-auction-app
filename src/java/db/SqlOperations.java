@@ -7,10 +7,10 @@ import java.util.Set;
  * 
  * @author i-am-prinx
  */
-public interface SqlOperations<T> {
+public interface SqlOperations<T, M> {
     
     // retrieves an instance of the specified return type
-    public T get(Integer... Id);
+    public T get(M id);
     
     // retrieves all instances of the specified return type
     public Set<T> getAll();

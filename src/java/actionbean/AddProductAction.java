@@ -1,5 +1,6 @@
 package actionbean;
 
+import actionbean.beanutils.FrequentOperations;
 import db.sql.implementer.ProductOperationsImpl;
 
 import models.Product;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
@@ -68,6 +70,8 @@ public class AddProductAction extends ProductOperationsImpl implements SessionAw
         product = insertInto(user.getId(), imageName, sdf.format(uploaded_at));
         
         if (product != null) {
+            Set<Product> authUserProduct = FrequentOperations.customDBqueryForProduct(user);
+            session.put("auth_user_products", authUserProduct);
             return SUCCESS;
         }
         

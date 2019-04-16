@@ -1,9 +1,14 @@
 package actionbean;
 
-import db.sql.implementer.UserOperationsImpl;
-import java.util.Map;
-import models.User;
 import org.apache.struts2.interceptor.SessionAware;
+
+import java.util.Map;
+import java.util.Set;
+
+import actionbean.beanutils.FrequentOperations;
+import db.sql.implementer.UserOperationsImpl;
+import models.Product;
+import models.User;
 
 /**
  *
@@ -28,6 +33,10 @@ public class UserProfileUpdate extends UserOperationsImpl implements SessionAwar
             User updated_user = updateData(user);
             if (updated_user != null){                
                 session.put("auth_user", updated_user);
+                
+                Set<Product> authUserProduct = FrequentOperations.customDBqueryForProduct(user);
+                session.put("auth_user_products", authUserProduct);
+                
                 return SUCCESS;
             }
         }

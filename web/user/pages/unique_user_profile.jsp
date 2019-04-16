@@ -16,6 +16,17 @@
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
               crossorigin="anonymous">
+        
+        <style>
+            .product-list {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            
+            .product-list div {
+                margin: 10px;
+            }
+        </style>
     </head>
     <body>
         <div class="container-fluid">
@@ -34,6 +45,21 @@
                     <b>Email</b> : 
                     <c:out value="${requested_user.getEmail()}" />
                 </p>
+            </div>
+                
+            <h4 class="mt-4"> Your products </h4>
+            <div class="product-list">
+                <c:forEach items="${requested_user_products}" var="product">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" 
+                         src="${pageContext.request.contextPath}/product-image/${product.getImage()}">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <c:out value="${product.getName()}" />
+                        </h5>
+                    </div>
+                 </div>
+                </c:forEach>
             </div>
         </div>                       
     </body>

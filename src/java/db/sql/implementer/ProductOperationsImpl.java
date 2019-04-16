@@ -22,7 +22,7 @@ import models.User;
  * This helps to implement CRUD operations for product objects...
  * @author i-am-prinx
  */
-public class ProductOperationsImpl extends ActionSupport implements SqlOperations<Product> {
+public class ProductOperationsImpl extends ActionSupport implements SqlOperations<Product, Integer> {
     private int id;         // product unique identity
     private String name;    // product name
     private int price;      // product price
@@ -31,8 +31,77 @@ public class ProductOperationsImpl extends ActionSupport implements SqlOperation
     
     
     @Override
-    public Product get(Integer... Id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Product get(Integer id) {
+        Connection con = ConnectionFactory.getConnection();
+        String query = "select * from product where id=?";
+        Product product = new Product();
+        try {
+            PreparedStatement ps= con.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            while(result.next()) {
+                product.setId(result.getInt("id"));
+                product.setName(result.getString("name"));
+                product.setPrice(result.getInt("price"));
+                product.setImage(result.getString("image"));
+                product.setUploadTime(result.getString("uploaded_at"));
+                product.setOwner(result.getInt("owner"));
+            }
+            
+            return product;
+        }
+        
+        catch (Exception ex){
+            System.out.println("Error retrieving data : \n" + ex );
+        }
+        
+        finally{
+            try{
+                if (con != null){
+                    con.close();
+                }
+            } 
+            catch(Exception ex){}
+        }
+        return null;
+    }
+    
+    /** 
+     * This allows external body to pass in their very own query string to 
+     * interact with the product table
+     * 
+     * @param query:
+     *      query passed should be referencing the product table
+     * @return  Set<Product>
+     */
+    public static Set<Product> get(PreparedStatement query) {
+        Connection con = ConnectionFactory.getConnection();
+        Set<Product> productSet = new HashSet();
+        
+        try {
+            PreparedStatement ps = query;
+            ResultSet result = ps.executeQuery();
+            while(result.next()){
+                Product product = new Product();
+                
+                product.setId(result.getInt("id"));
+                product.setName(result.getString("name"));
+                product.setPrice(result.getInt("price"));
+                product.setImage(result.getString("image"));
+                product.setUploadTime(result.getString("uploaded_at"));
+                product.setOwner(result.getInt("owner"));
+                
+                productSet.add(product);
+            }
+            
+            return productSet;
+        }
+        catch(Exception ex){
+            System.out.println(
+                "Error retrieving multiple products from table --- query is customized: \n" + ex);
+        }
+        
+        return null;
     }
 
     @Override

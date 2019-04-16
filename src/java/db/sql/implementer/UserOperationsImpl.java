@@ -32,7 +32,7 @@ import java.util.HashSet;
  * @author i-am-prinx
  */
 
-public class UserOperationsImpl extends ActionSupport implements SqlOperations<User> {
+public class UserOperationsImpl extends ActionSupport implements SqlOperations<User, String> {
     
     protected String username;
     protected String password;
@@ -52,38 +52,20 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
     /**
      * helps to retrieve a particular user instance from data source
      * 
-     * @param Id --> representing the id of a particular object
-     *  an array like ( structured in form of array ) optional argument.
-     *  if this is passed, retrieval will be done based on this.
+     * @param id
      *  
      * @retuns User
     */
     @Override
-    public User get(Integer... Id) {
+    public User get(String id) {
         
         Connection con = ConnectionFactory.getConnection();
         String query = (String) "select * from users where username=?";
-        
         User retrieved_user = new User();
         
         try {
-            PreparedStatement ps = null;
-            
-            if (Id.length >= 1){
-                // if a unique key is passed to retrieve a particular object
-                String query_for_arg = "select * from users where id=?";
-                ps = con.prepareStatement(query_for_arg);
-                for(Integer item : Id){
-                    ps.setInt(1, item);
-                }
-            }
-            
-            else {
-                // if no unique key is passed to retrieve a particular object
-                ps = con.prepareStatement(query);
-                ps.setString(1, getUsername());
-            }
-            
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, id);            
             ResultSet result = ps.executeQuery();
             
             while (result.next()){
@@ -96,9 +78,13 @@ public class UserOperationsImpl extends ActionSupport implements SqlOperations<U
                
                return retrieved_user;
             }
-        } catch (Exception e) {
+        } 
+        
+        catch (Exception e) {
             System.out.println("Single Retrieval Error: \n\n" + e);
-        } finally {
+        } 
+        
+        finally {
             if (con != null ){
                 try {
                     con.close();

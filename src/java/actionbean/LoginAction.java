@@ -3,9 +3,12 @@ package actionbean;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.util.Map;
+import models.User;
+import java.util.Set;
 
 import db.sql.implementer.UserOperationsImpl;
-import models.User;
+import actionbean.beanutils.FrequentOperations;
+import models.Product;
 
 
 
@@ -28,7 +31,9 @@ public class LoginAction extends UserOperationsImpl implements SessionAware {
     */
     @Override
     public String execute() throws Exception {
-        user = get();                 // retrieve user trying to login 
+        // retrieve user trying to login with passed in username 
+        // ( getUsername() from defined super class )
+        user = get(getUsername()); 
         
         User sessionUser = null;
         
@@ -37,10 +42,15 @@ public class LoginAction extends UserOperationsImpl implements SessionAware {
             sessionUser = (User) sessionMap.get("auth_user");
         }
         
+        // retrieves all the product of the currently logged in user and save it
+        // in session
+        Set<Product> authUserProduct = FrequentOperations.customDBqueryForProduct(user);
+        sessionMap.put("auth_user_products", authUserProduct);
+        
         // if the user is present in the session, just log in the user
         if ( sessionUser != null && sessionUser.getUsername().equals(user.getUsername())){
             return SUCCESS;
-        }
+        }       
         
         // if the inputted login password is equal to the password retreived from
         // data source. This will only happen if no user is found in session
@@ -67,7 +77,7 @@ public class LoginAction extends UserOperationsImpl implements SessionAware {
         this.sessionMap = map;
     }
     
-
+    
     /*
         *                                                               *
           Getter methods below helps to access the properties of a user

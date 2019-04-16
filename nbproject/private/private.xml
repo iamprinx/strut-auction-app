@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/web/product/pages/product_market.jsp</file>
-            <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/src/java/struts.xml</file>
-            <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/src/java/actionbean/ProductMarketAction.java</file>
+            <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/src/java/actionbean/RequestedUniqueUser.java</file>
+            <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/web/user/pages/unique_user_profile.jsp</file>
         </group>
     </open-files>
 </project-private>
