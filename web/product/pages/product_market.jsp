@@ -28,6 +28,7 @@
                 <p>
                     Price: <c:out value="${product.getPrice()}" />
                 </p>
+                <img src="${pageContext.request.contextPath}/product-image/${product.getImage()}">
             </c:forEach>
         </div>
     </body>

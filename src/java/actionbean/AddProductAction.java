@@ -53,12 +53,19 @@ public class AddProductAction extends ProductOperationsImpl implements SessionAw
         // creating a unique date time( in string format ) for each product upload 
         SimpleDateFormat sdf = new SimpleDateFormat("yy-mm-dd");
         Date uploaded_at = new Date();
-        String imgPath = constructFilePath( sdf.format(uploaded_at));
+        String imageName = constructImageName(sdf.format(uploaded_at));
         
-        File file = new File(imgPath, getImageFileName());
+        // directory where image will be saved in the file system
+        // context_path is the path where our servlet is currently running in our drive
+        String contextPath = ServletActionContext.getServletContext().getRealPath("/");
+        contextPath += "/product-image";
+        
+        File file = new File(contextPath, imageName);
         FileUtils.copyFile(getImage(), file);
         
-        product = insertInto(user.getId(), file.toString(), sdf.format(uploaded_at));
+        // we'll simply save the image path as the unique name constructed for
+        // the uploaded image.
+        product = insertInto(user.getId(), imageName, sdf.format(uploaded_at));
         
         if (product != null) {
             return SUCCESS;
@@ -73,25 +80,14 @@ public class AddProductAction extends ProductOperationsImpl implements SessionAw
      * @param uploaded_at
      * @return 
      */
-    private String constructFilePath(String uploaded_at){
-        char sep = File.separatorChar;    // dynamic path separator for different OS           
+    private String constructImageName(String uploaded_at){
+        // constructing file name to a unique name
+        String file_name = user.getId() + "_" + user.getUsername() + "_" + uploaded_at;
+        file_name += "_" + getImageFileName();
         
-        // using user unique details to make up path
-        String uniquePath = sep  + "product-image" + sep + user.getId() + "" + sep;    
+        System.out.println("New image file name is " +  file_name);                
         
-        // using product unique details to make up path
-        uniquePath += user.getUsername() + sep + uploaded_at + sep;
-        
-        // retreiving the path where request is been served, this is absolute path from root dir.
-        String contextPath = ServletActionContext.getServletContext().getRealPath("/");
-        
-        // going out from web folder ( it's not advice to keep things within the web folder)
-        contextPath = contextPath.substring(0, contextPath.length() - 11);
-        
-        // merging unique path ( path constructed using unique identity ) with context path
-        contextPath = contextPath + sep + uniquePath ;
-        
-        return contextPath;
+        return file_name;
     }
     
     
