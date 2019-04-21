@@ -31,6 +31,16 @@
             .product-list div {
                 margin: 10px;
             }
+            
+            .card-body {
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .card-body a {
+                color: blue;
+                font-weight: 600;
+            }
         </style>
         
     </head>
@@ -103,6 +113,8 @@
                         <h5 class="card-title">
                             <c:out value="${product.getName()}" />
                         </h5>
+                        
+                        <s:a action="nav-to-product-bid" namespace="/bid"> Bid </s:a>
                     </div>
                  </div>
                 </c:forEach>
@@ -114,3 +126,4 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
+ 

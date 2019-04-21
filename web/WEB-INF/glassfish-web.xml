@@ -3,6 +3,7 @@
 <glassfish-web-app error-url="">
   <context-root>/bidx</context-root>
   <class-loader delegate="true"/>
+  <property name="alternatedocroot_1" value="from=/product-image/* dir=C:/Users/i-am-prinx/dev/Netbean/JavaWeb/AuctionApp/"/>
   <jsp-config>
     <property name="keepgenerated" value="true">
       <description>Keep a copy of the generated servlet class' java code.</description>

@@ -26,6 +26,16 @@
             .product-list div {
                 margin: 10px;
             }
+            
+            .card-body {
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .card-body a {
+                color: blue;
+                font-weight: 600;
+            }
         </style>
     </head>
     <body>
@@ -57,6 +67,8 @@
                         <h5 class="card-title">
                             <c:out value="${product.getName()}" />
                         </h5>
+                        
+                        <s:a action="nav-to-product-bid" namespace="/bid"> Bid </s:a>
                     </div>
                  </div>
                 </c:forEach>

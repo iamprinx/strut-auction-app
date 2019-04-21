@@ -60,6 +60,7 @@ public class AddProductAction extends ProductOperationsImpl implements SessionAw
         // directory where image will be saved in the file system
         // context_path is the path where our servlet is currently running in our drive
         String contextPath = ServletActionContext.getServletContext().getRealPath("/");
+        contextPath = contextPath.substring(0, contextPath.length() - 11);
         contextPath += "/product-image";
         
         File file = new File(contextPath, imageName);
@@ -123,5 +124,5 @@ public class AddProductAction extends ProductOperationsImpl implements SessionAw
     public void setImageContentType(String imageContentType) {
         this.imageContentType = imageContentType;
     }
-    
+
 }
