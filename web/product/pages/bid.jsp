@@ -19,7 +19,7 @@
             <h3>${bid_product.getName()}</h3>
                 
             <h5>Bid on this product</h5>
-            <s:form>
+            <s:form action="process-bid" method="post" namespace="/product">
                 <div class="form-group">
                     <s:textfield 
                         cssClass="form-control" 

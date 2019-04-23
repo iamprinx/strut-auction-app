@@ -52,7 +52,13 @@
                             <c:out value="${product.getName()}" />
                         </h5>
                         
-                        <s:a action="nav-to-product-bid" namespace="/bid"> Bid </s:a>
+                        <s:url action="nav-to-product-bid" var="productId" namespace="/product">
+                            <s:param name="productId">
+                                <c:out value="${product.getId()}" />
+                            </s:param>
+                        </s:url>
+                        
+                        <s:a href="%{productId}">Bid</s:a>
                     </div>
                  </div>
                 </c:forEach>

@@ -5,8 +5,8 @@
         <group>
             <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/web/product/pages/bid.jsp</file>
             <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/web/user/pages/profile.jsp</file>
-            <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/src/java/actionbean/RequestedUniqueUser.java</file>
             <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/src/java/actionbean/BidAction.java</file>
+            <file>file:/C:/Users/i-am-prinx/dev/NetBean/JavaWeb/AuctionApp/src/java/db/sql/implementer/ProductOperationsImpl.java</file>
         </group>
     </open-files>
 </project-private>

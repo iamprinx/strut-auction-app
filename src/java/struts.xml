@@ -23,6 +23,11 @@
             <result>pages/bid.jsp</result>
         </action>
         
+        <action name="process-bid" class="actionbean.ProcessBidAction">
+            <result name="error">/user/pages/error.jsp</result>
+            <result>/user/pages/profile.jsp</result>
+        </action>
+        
         <action name="nav-to-market" class="actionbean.ProductMarketAction">
             <result>pages/product_market.jsp</result>
         </action>
