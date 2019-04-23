@@ -71,7 +71,7 @@ public class AddProductAction extends ProductOperationsImpl implements SessionAw
         product = insertInto(user.getId(), imageName, sdf.format(uploaded_at));
         
         if (product != null) {
-            Set<Product> authUserProduct = FrequentOperations.customDBqueryForProduct(user);
+            Set<Product> authUserProduct = FrequentOperations.getUserProduct(user);
             session.put("auth_user_products", authUserProduct);
             return SUCCESS;
         }

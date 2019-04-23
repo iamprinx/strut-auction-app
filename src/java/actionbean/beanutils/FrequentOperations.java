@@ -26,7 +26,7 @@ public class FrequentOperations {
      * session.
      * @param user 
      */
-    public static Set<Product> customDBqueryForProduct(User user){
+    public static Set<Product> getUserProduct(User user){
         Set<Product> authUserProductList = null;
         
         Connection con = ConnectionFactory.getConnection();

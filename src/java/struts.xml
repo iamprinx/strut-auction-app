@@ -18,6 +18,11 @@
             <result>pages/upload_product.jsp</result>
         </action>
         
+        <action name="nav-to-product-bid" class="actionbean.BidAction">
+            <param name="productId">${productId}</param>
+            <result>pages/bid.jsp</result>
+        </action>
+        
         <action name="nav-to-market" class="actionbean.ProductMarketAction">
             <result>pages/product_market.jsp</result>
         </action>

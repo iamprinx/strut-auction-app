@@ -26,16 +26,13 @@ public class RequestedUniqueUser extends UserOperationsImpl implements SessionAw
     public String execute() throws Exception {
         
         if( session.containsKey("requested_user")) session.remove("requested_user");
-        if ( getUsername() == "" ) return ERROR; 
+        if ( getUsername() == "" ) return ERROR;
         
-        System.out.println(getUsername());
-        System.out.println(getUsername());
-        System.out.println(getUsername());
-               
+        // retrieving user from the database using the username passed
         retrieved_user = get(getUsername());
         if ( retrieved_user != null ){
             session.put("requested_user", retrieved_user);
-            Set<Product> authUserProduct = FrequentOperations.customDBqueryForProduct(retrieved_user);
+            Set<Product> authUserProduct = FrequentOperations.getUserProduct(retrieved_user);
             session.put("requested_user_products", authUserProduct);
         }
         

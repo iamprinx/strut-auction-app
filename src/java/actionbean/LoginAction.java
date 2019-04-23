@@ -44,7 +44,7 @@ public class LoginAction extends UserOperationsImpl implements SessionAware {
         
         // retrieves all the product of the currently logged in user and save it
         // in session
-        Set<Product> authUserProduct = FrequentOperations.customDBqueryForProduct(user);
+        Set<Product> authUserProduct = FrequentOperations.getUserProduct(user);
         sessionMap.put("auth_user_products", authUserProduct);
         
         // if the user is present in the session, just log in the user
