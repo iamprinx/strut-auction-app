@@ -16,7 +16,6 @@ import java.sql.Statement;
 import java.util.HashSet;
 
 import models.Product;
-import models.User;
 
 /**
  * This helps to implement CRUD operations for product objects...
@@ -35,6 +34,7 @@ public class ProductOperationsImpl extends ActionSupport implements SqlOperation
         Connection con = ConnectionFactory.getConnection();
         String query = "select * from product where id=?";
         Product product = new Product();
+        
         try {
             PreparedStatement ps= con.prepareStatement(query);
             ps.setInt(1, id);
@@ -65,7 +65,7 @@ public class ProductOperationsImpl extends ActionSupport implements SqlOperation
         }
         return null;
     }
-    
+        
     /** 
      * This allows external body to pass in their very own query string to 
      * interact with the product table

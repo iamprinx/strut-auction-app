@@ -73,8 +73,14 @@
                                 <c:out value="${product.getId()}" />
                             </s:param>
                         </s:url>
-                        
                         <s:a href="%{productId}">Bid</s:a>
+                        
+                        <s:url action="bids-details" var="productId" namespace="/product">
+                            <s:param name="productId">
+                                <c:out value="${product.getId()}" />
+                            </s:param>
+                        </s:url>
+                        <s:a href="%{productId}">view</s:a>
                     </div>
                  </div>
                 </c:forEach>

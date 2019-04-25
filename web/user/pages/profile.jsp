@@ -107,21 +107,30 @@
             <div class="product-list">
                 <c:forEach items="${auth_user_products}" var="product">
                 <div class="card" style="width: 18rem;">
+                    
                     <img class="card-img-top" 
                          src="${pageContext.request.contextPath}/product-image/${product.getImage()}">
+                    
                     <div class="card-body">
                         <h5 class="card-title">
                             <c:out value="${product.getName()}" />
-                        </h5>
+                        </h5>                       
                         
                         <s:url action="nav-to-product-bid" var="productId" namespace="/product">
                             <s:param name="productId">
                                 <c:out value="${product.getId()}" />
                             </s:param>
-                        </s:url>
-                        
+                        </s:url>                        
                         <s:a href="%{productId}">Bid</s:a>
-                    </div>
+                        
+                        <s:url action="bids-details" var="productId" namespace="/product">
+                            <s:param name="productId">
+                                <c:out value="${product.getId()}" />
+                            </s:param>
+                        </s:url>                        
+                        <s:a href="%{productId}">view</s:a>
+                        
+                     </div>
                  </div>
                 </c:forEach>
             </div>

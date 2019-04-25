@@ -20,11 +20,11 @@ public class BidAction extends ProductOperationsImpl implements SessionAware {
         return SUCCESS;
     }
 
-    public int getProduct_id() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProduct_id(int productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
         

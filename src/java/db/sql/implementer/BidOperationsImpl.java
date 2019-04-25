@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 import models.Bid;
+import models.UserProductBid;
 
 
 /**
@@ -43,15 +44,19 @@ public class BidOperationsImpl extends ActionSupport implements SqlOperations<Bi
     }
     
     /**
-     * helps to retrieve all bid history for a particular product
+     * helps to retrieve all bid history for a particular product.
+     * The retrieved data will contain the user ( bidder's --> first_name last_name email ),
+     * product( product name and image ) and the bid amount.
      * @param product_id
      *      product id which bid history is to be retrieved.
      * @return
      */
-    public Set<Bid> getAll(Integer product_id) {
+    public Set<UserProductBid> getAll(Integer product_id) {
         Connection con = ConnectionFactory.getConnection();
-        Set<Bid> bid_set = new HashSet<Bid>();
-        String query = "select * from bids where product=?";
+        Set<UserProductBid> bids_users_product = new HashSet();
+               
+        String query = "select b.amount, u.firstname, u.lastname, u.email, p.name, p.image";
+        query += " from product p join users u on p.owner = u.id join bids b on u.id = b.user where p.id =?";
         
         try{
             PreparedStatement ps = con.prepareStatement(query);
@@ -59,16 +64,23 @@ public class BidOperationsImpl extends ActionSupport implements SqlOperations<Bi
             ResultSet result = ps.executeQuery();
             
             while(result.next()){
-                Bid product_bid = new Bid();
-                product_bid.setAmount(result.getInt("amount"));
-                product_bid.setBidder(result.getInt("user"));
-                product_bid.setId(result.getInt("id"));
-                product_bid.setProduct(result.getInt("product"));
+                UserProductBid productsbid = new UserProductBid();
                 
-                bid_set.add(product_bid);
+                productsbid.setBidAmount(result.getInt("amount"));
+                productsbid.setEmail(result.getString("email"));
+                productsbid.setFirstname(result.getString("firstname"));
+                productsbid.setLastname(result.getString("lastname"));
+                productsbid.setProductName(result.getString("name"));
+                productsbid.setProductImage(result.getString("image"));
+                
+                System.out.println(result.getString("image"));
+                System.out.println(result.getString("image"));
+                System.out.println(result.getString("image"));
+                
+                bids_users_product.add(productsbid);
             }
             
-            return bid_set;
+            return bids_users_product;
         }
         catch(SQLException ex){
             System.out.println("Error occured while trying to retrieve all bid for product:\n" + ex);
