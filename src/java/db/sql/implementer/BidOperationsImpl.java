@@ -55,8 +55,8 @@ public class BidOperationsImpl extends ActionSupport implements SqlOperations<Bi
         Connection con = ConnectionFactory.getConnection();
         Set<UserProductBid> bids_users_product = new HashSet();
                
-        String query = "select b.amount, u.firstname, u.lastname, u.email, p.name, p.image";
-        query += " from product p join users u on p.owner = u.id join bids b on u.id = b.user where p.id =?";
+        String query = "select u.username, u.firstname, u.lastname, u.email, p.name, p.image, b.amount";
+        query += " from bids b join users u on b.user = u.id join product p on b.product = p.id where p.id=?";
         
         try{
             PreparedStatement ps = con.prepareStatement(query);
